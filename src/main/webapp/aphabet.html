@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" ></script>
+    <script type="text/javascript">
+        var mouseWidth = 100;
+        var mouseHeight = 100;
+
+        function resize() {
+            jQuery('#backgroundLayer')
+                    .height(jQuery(window).height())
+                    .width(jQuery(window).width());
+        }
+
+        jQuery(function() {
+            jQuery(window).resize(resize);
+            resize();
+
+            jQuery('#mouse').css({
+               width: mouseWidth,
+               height: mouseHeight
+            });
+
+            jQuery(document).on('mousemove', function(e){
+                jQuery('#mouse').css({
+                    left:  e.pageX - mouseWidth/2,
+                    top:   e.pageY - mouseWidth/2
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+            background: url('./images/background.png') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            border: 3px solid red;
+            opacity: 0.5;
+        }
+
+        #backgroundLayer {
+            opacity: 0.3;
+            background: black;
+            padding: 0px;
+            margin: 0px;
+            border: 0px;
+        }
+    </style>
+</head>
+<body>
+<div id="backgroundLayer"></div>
+<div id="mouse" class="circle"></div>
+</body>
+</html>
