@@ -1,0 +1,38 @@
+div.alphabet {
+    position: absolute;
+    color: white;
+    font-size: 200px;
+    font-weight: bold;
+}
+
+body {
+    background: url('../images/background.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    overflow: hidden;
+}
+
+#mouse {
+    position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background: yellow;
+    border: 3px solid red;
+    opacity: 0.5;
+    border: 0px;
+}
+
+#backgroundLayer {
+    opacity: 0.3;
+    background: black;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    overflow: hidden;
+}
