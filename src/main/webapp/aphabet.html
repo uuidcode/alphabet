@@ -5,8 +5,14 @@
     <title></title>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js" ></script>
     <script type="text/javascript">
-        var mouseWidth = 100;
-        var mouseHeight = 100;
+        var mouseWidth = 200;
+        var mouseHeight = 200;
+        var alphabetWidth = 200;
+        var alphabetHeight = 200;
+
+        var width = 0;
+        var height = 0;
+        var matrix = [];
 
         function resize() {
             jQuery('#backgroundLayer')
@@ -15,6 +21,18 @@
         }
 
         jQuery(function() {
+            width = jQuery(window).width();
+            height = jQuery(window).height();
+
+            var row = [];
+
+            for (var i = 0; i < height; i++) {
+                for (var j = 0; j < width; j++) {
+                    row.push(0);
+                }
+                matrix.push(row)
+            }
+
             jQuery(window).resize(resize);
             resize();
 
@@ -25,13 +43,99 @@
 
             jQuery(document).on('mousemove', function(e){
                 jQuery('#mouse').css({
-                    left:  e.pageX - mouseWidth/2,
-                    top:   e.pageY - mouseWidth/2
+                    left: e.pageX - mouseWidth/2,
+                    top: e.pageY - mouseWidth/2
                 });
+
+                var alphabet = jQuery('div.alphabet');
+                alphabet.each(function() {
+                    var item = jQuery(this);
+                    var offset = item.position();
+                    var isVisible = false;
+
+                    if (offset.left <= e.pageX && e.pageX <= offset.left + item.width()) {
+                        if (offset.top <= e.pageY && e.pageY <= offset.top + item.height()) {
+                            isVisible = true;
+                        }
+                    }
+
+                    if (isVisible) {
+                        item.css({
+                            opacity: 1
+                        });
+
+                        jQuery("#mp3_" + item.html())[0].play();
+
+                    } else {
+                        item.css({
+                            opacity: 0
+                        });
+                    }
+                })
             });
+
+            //var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+//            var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
+            var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+            for (var i = 0; i < alphabetArray.length; i++) {
+                var alphabet = jQuery('<div/>')
+                        .html(alphabetArray[i])
+                        .attr('class', 'alphabet');
+
+                jQuery('body').append(alphabet);
+
+                jQuery('body').append('<audio id="mp3_' + alphabetArray[i] + '"><source src="./mp3/' + alphabetArray[i] + '.mp3"></source></audio>');
+
+                var left = 0;
+                var top = 0;
+
+                do {
+                    left = Math.floor((Math.random() * (width - alphabetWidth)) + 1);
+                    top = Math.floor((Math.random() * (height - alphabetHeight)) + 1);
+                } while (duplicated(left, top));
+
+                setMatrix(left, top);
+
+                alphabet.css({
+                    left: left,
+                    top: top,
+                    width: alphabetWidth,
+                    height: alphabetHeight,
+                    opacity: 0
+                })
+            }
+
         });
+
+        function duplicated(left, top) {
+            for (var i = left; i < left + alphabetWidth; i++) {
+                for (var j = top; j < top + alphabetHeight; j++) {
+                    if (matrix[j][i] == 1) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        function setMatrix(left, top) {
+            for (var i = left; i < left + alphabetWidth; i++) {
+                for (var j = top; j < top + alphabetHeight; j++) {
+                    matrix[j][i] = 1;
+                }
+            }
+        }
+
     </script>
     <style>
+        div.alphabet {
+            position: absolute;
+            color: white;
+            font-size: 200px;
+        }
+
         body {
             background: url('./images/background.png') no-repeat center center fixed;
             -webkit-background-size: cover;
@@ -41,6 +145,7 @@
             padding: 0px;
             margin: 0px;
             border: 0px;
+            overflow: hidden;
         }
 
         #mouse {
@@ -60,6 +165,7 @@
             padding: 0px;
             margin: 0px;
             border: 0px;
+            overflow: hidden;
         }
     </style>
 </head>
