@@ -2,6 +2,7 @@ div.alphabet {
     position: absolute;
     color: white;
     font-weight: bold;
+    text-align: center;
 }
 
 body {
