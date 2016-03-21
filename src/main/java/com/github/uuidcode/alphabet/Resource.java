@@ -15,6 +15,7 @@ import org.jsoup.nodes.Document;
 
 public class Resource {
     public static void main(String[] args) throws Exception {
+
         String word = "friend";
 
         Document document = Jsoup.connect("http://dic.daum.net/search.do?q=" + word).get();
