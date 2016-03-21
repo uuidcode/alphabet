@@ -22,7 +22,6 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-
         String word = "friend".toUpperCase();
         String imageUrl = "";
 
