@@ -79,9 +79,7 @@ jQuery(document).ready(function() {
 
 
 
-    //var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-//            var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
-    var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
     for (var i = 0; i < alphabetArray.length; i++) {
         jQuery('body')
@@ -93,6 +91,8 @@ jQuery(document).ready(function() {
                         .attr('src', './mp3/' + alphabetArray[i] + ".mp3")));
 
     }
+
+    alphabetArray = ['P', 'I', 'A', 'N', 'O'];
 
     for (var i = 0; i < alphabetArray.length; i++) {
         var alphabet = jQuery('<div/>')
