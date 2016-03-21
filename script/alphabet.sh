@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
+font=${1}
+size=${2}
+imagePath=../src/main/webapp/images
+
 function createAlphabet() {
 label=${1}
-font=${2}
-fontSize=${3}
 
 convert -background none -fill DodgerBlue \
-      -font ${font} -pointsize ${fontSize}  label:${label} -trim +repage \
+      -size ${size} \
+      -gravity center \
+      -font ${font} \
+      label:${label} \
+      -trim +repage \
       -bordercolor None -border 10x10 \
       \
       \( +clone -bordercolor None -border 1x1 \
@@ -19,9 +25,9 @@ convert -background none -fill DodgerBlue \
       -compose Hardlight -composite  ${imagePath}/${label}.png
 }
 
-imagePath=../src/main/webapp/images
+
 
 for i in {A..Z}
 do
-    createAlphabet ${i} Chalkboard 200
+    createAlphabet ${i}
 done

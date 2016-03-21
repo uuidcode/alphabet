@@ -17,7 +17,7 @@
 
     var mouseWidth = 200;
     var mouseHeight = 200;
-    var alphabetWidth = 150;
+    var alphabetWidth = 100;
     var alphabetHeight = 200;
 
     var width = 0;
@@ -84,7 +84,7 @@
                         opacity: 1
                     });
 
-                    jQuery("#mp3_" + item.html())[0].play();
+                    jQuery("#mp3_" + item.attr('letter'))[0].play();
 
                 } else {
                     item.css({
@@ -119,11 +119,16 @@
         alphabetArray = word.split('');
 
         for (var i = 0; i < alphabetArray.length; i++) {
+            var image = jQuery('<img>')
+                .attr('src', './images/' + alphabetArray[i] + '.png');
+
             var alphabet = jQuery('<div/>')
-                .html(alphabetArray[i])
+                //.html(alphabetArray[i])
+                .append(image)
                 .attr('class', 'alphabet')
                 .attr('status', 'none')
                 .attr('index', i)
+                .attr('letter', alphabetArray[i])
                 .css({
                     fontSize: alphabetHeight
                 });
