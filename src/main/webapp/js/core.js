@@ -1,6 +1,6 @@
 var mouseWidth = 200;
 var mouseHeight = 200;
-var alphabetWidth = 200;
+var alphabetWidth = 150;
 var alphabetHeight = 200;
 
 var width = 0;
@@ -13,15 +13,25 @@ function resize() {
         .width(jQuery(window).width());
 }
 
-jQuery(function() {
+var wordPositon = 0;
+
+jQuery(document).ready(function() {
     width = jQuery(window).width();
     height = jQuery(window).height();
 
-    var row = [];
+    console.log('width', width);
+    console.log('height', height);
+
+    matrix = [];
 
     for (var i = 0; i < height; i++) {
+        var row = [];
         for (var j = 0; j < width; j++) {
-            row.push(0);
+            if (i < alphabetHeight + alphabetHeight/2) {
+                row.push(1);
+            } else {
+                row.push(0);
+            }
         }
         matrix.push(row)
     }
@@ -40,7 +50,7 @@ jQuery(function() {
             top: e.pageY - mouseWidth/2
         });
 
-        var alphabet = jQuery('div.alphabet');
+        var alphabet = jQuery('div.alphabet[status="none"]');
         alphabet.each(function() {
             var item = jQuery(this);
             var offset = item.position();
@@ -67,6 +77,8 @@ jQuery(function() {
         })
     });
 
+
+
     //var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 //            var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
     var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -85,7 +97,11 @@ jQuery(function() {
     for (var i = 0; i < alphabetArray.length; i++) {
         var alphabet = jQuery('<div/>')
             .html(alphabetArray[i])
-            .attr('class', 'alphabet');
+            .attr('class', 'alphabet')
+            .attr('status', 'none')
+            .css({
+                fontSize: alphabetHeight
+            });
 
         jQuery('body').append(alphabet);
 
@@ -95,6 +111,8 @@ jQuery(function() {
         do {
             left = Math.floor((Math.random() * (width - alphabetWidth)) + 1);
             top = Math.floor((Math.random() * (height - alphabetHeight)) + 1);
+            console.log('random');
+
         } while (duplicated(left, top));
 
         setMatrix(left, top);
@@ -107,6 +125,18 @@ jQuery(function() {
             opacity: 0
         })
     }
+
+    jQuery('div.alphabet').on('click', function () {
+        console.log('click');
+        jQuery(this).show();
+        jQuery(this).attr('status', 'selected')
+        jQuery(this).animate({
+            left: wordPositon,
+            top: 0,
+            color: '#000000'
+        });
+        wordPositon += alphabetWidth;
+    });
 
 });
 
