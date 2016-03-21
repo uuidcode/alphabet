@@ -1,8 +1,7 @@
-    var wordList = ['PIANO', 'APPLE', 'DOG'];
+    var wordList = ['PIANO', 'APPLE', 'DOG', 'MOON'];
     var word = wordList[Math.floor(Math.random() * wordList.length)];
 
     console.log('word', word);
-
 
     var mouseWidth = 200;
     var mouseHeight = 200;
