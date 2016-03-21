@@ -1,11 +1,11 @@
-    var word = wordList[Math.floor(Math.random() * wordList.length)];
+    var word = wordList[random(wordList.length)];
 
     console.log('word', word);
 
     var mouseWidth = 200;
     var mouseHeight = 200;
     var alphabetWidth = 100;
-    var alphabetHeight = 200;
+    var alphabetHeight = 150;
 
     var width = 0;
     var height = 0;
@@ -19,9 +19,21 @@
 
     var wordPositon = 0;
 
+    function random(num) {
+        return Math.round(Math.random() * num);
+    }
+
     jQuery(document).ready(function() {
         width = jQuery(window).width();
         height = jQuery(window).height();
+
+        var backgroundIndex = random(4) + 1;
+
+        console.log('backgroundIndex', backgroundIndex);
+
+        jQuery('body').css({
+            background: 'url("./images/background' + backgroundIndex + '.png") no-repeat center center fixed'
+        });
 
         console.log('width', width);
         console.log('height', height);
@@ -31,7 +43,7 @@
         for (var i = 0; i < height; i++) {
             var row = [];
             for (var j = 0; j < width; j++) {
-                if (i < alphabetHeight + alphabetHeight/2) {
+                if (i < alphabetHeight) {
                     row.push(1);
                 } else {
                     row.push(0);

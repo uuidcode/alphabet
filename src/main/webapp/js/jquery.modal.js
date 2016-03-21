@@ -82,7 +82,13 @@
             }
             $(document).off('keydown.modal').on('keydown.modal', function(event) {
                 var current = getCurrent();
-                if (event.which == 27 && current.options.escapeClose) current.close();
+                if (event.which == 27 && current.options.escapeClose) {
+                    current.close();
+
+                    if (closeCallback) {
+                        closeCallback();
+                    }
+                }
             });
             if (this.options.clickClose)
                 this.$blocker.click(function(e) {
