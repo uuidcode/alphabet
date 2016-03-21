@@ -1,16 +1,3 @@
-    var wordList = [];
-    wordList.push('PIANO');
-    wordList.push('APPLE');
-    wordList.push('DOG');
-    wordList.push('MOON');
-    wordList.push('SUN');
-    wordList.push('BALLET');
-    wordList.push('MOTHER');
-    wordList.push('FATHER');
-    wordList.push('SPRING');
-    wordList.push('TEACHER');
-    wordList.push('STUDENT');
-
     var word = wordList[Math.floor(Math.random() * wordList.length)];
 
     console.log('word', word);
