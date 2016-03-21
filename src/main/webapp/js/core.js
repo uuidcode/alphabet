@@ -1,5 +1,12 @@
-    var wordList = ['PIANO', 'APPLE', 'DOG', 'MOON', 'BALLET', 'MOTHER', 'FATHER'];
-    wordList.push('SPRING');
+    var wordList = [];
+//    wordList.push('PIANO');
+//    wordList.push('APPLE');
+//    wordList.push('DOG');
+//    wordList.push('MOON');
+//    wordList.push('BALLET');
+//    wordList.push('MOTHER');
+    wordList.push('FATHER');
+//    wordList.push('SPRING');
 
     var word = wordList[Math.floor(Math.random() * wordList.length)];
 
