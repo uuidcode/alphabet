@@ -8,6 +8,8 @@
     wordList.push('MOTHER');
     wordList.push('FATHER');
     wordList.push('SPRING');
+    wordList.push('TEACHER');
+    wordList.push('STUDENT');
 
     var word = wordList[Math.floor(Math.random() * wordList.length)];
 
