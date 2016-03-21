@@ -1,4 +1,4 @@
-    var wordList = ['PIANO', 'APPLE'];
+    var wordList = ['PIANO', 'APPLE', 'DOG'];
     var word = wordList[Math.floor(Math.random() * wordList.length)];
 
     console.log('word', word);
