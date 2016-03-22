@@ -10,6 +10,8 @@
     var width = 0;
     var height = 0;
     var matrix = [];
+    var started = false;
+
 
     function resize() {
         jQuery('#backgroundLayer')
@@ -26,6 +28,21 @@
     jQuery(document).ready(function() {
         width = jQuery(window).width();
         height = jQuery(window).height();
+
+        setTimeout(function () {
+            started = true;
+            jQuery('div.alphabet').css({
+                opacity: 0
+            });
+
+            jQuery('body').append('<div id=\"mouse\"><div id=\"mouseShadow\"></div>');
+            jQuery('#mouse').css({
+                width: mouseWidth,
+                height: mouseHeight,
+                left: (width - mouseWidth)/2,
+                top: (height - mouseHeight)/2
+            });
+        }, 3000);
 
         var backgroundIndex = random(4) + 1;
 
@@ -55,14 +72,11 @@
         jQuery(window).resize(resize);
         resize();
 
-        jQuery('#mouse').css({
-            width: mouseWidth,
-            height: mouseHeight,
-            left: (width - mouseWidth)/2,
-            top: (height - mouseHeight)/2
-        });
-
         jQuery(document).on('mousemove', function(e){
+            if (!started) {
+                return;
+            }
+
             jQuery('#mouse').css({
                 left: e.pageX - mouseWidth/2,
                 top: e.pageY - mouseWidth/2
@@ -134,7 +148,6 @@
                 .attr('src', './images/' + alphabetArray[i] + '.png');
 
             var alphabet = jQuery('<div/>')
-                //.html(alphabetArray[i])
                 .append(image)
                 .attr('class', 'alphabet')
                 .attr('status', 'none')
@@ -145,6 +158,7 @@
                 });
 
             jQuery('body').append(alphabet);
+            alphabet.fadeOut().fadeIn().fadeOut().fadeIn().fadeOut().fadeIn();
 
             var completeRegion =
                 jQuery('<div>')
@@ -181,11 +195,15 @@
                 top: top,
                 width: alphabetWidth,
                 height: alphabetHeight,
-                opacity: 0
+                opacity: 1
             })
         }
 
         jQuery('body').on('click', function (e) {
+            if (!started) {
+                return;
+            }
+
             var alphabet = jQuery('div.alphabet[status="none"]');
             alphabet.each(function() {
                 var item = jQuery(this);
