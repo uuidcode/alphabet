@@ -80,16 +80,26 @@
                     }
                 }
 
+
                 if (isVisible) {
+                    var x = e.pageX - offset.left;
+                    var y = e.pageY - offset.top;
+                    var clipPath = 'circle(' + mouseWidth/2 + 'px at ' + x + 'px ' + y + 'px)';
+                    console.log('clipPath', clipPath);
+
                     item.css({
-                        opacity: 1
+                        'opacity': 1,
+                        '-webkit-clip-path': clipPath,
+                        'clip-path': clipPath
                     });
 
                     jQuery("#mp3_" + item.attr('letter'))[0].play();
 
                 } else {
                     item.css({
-                        opacity: 0
+                        opacity: 0,
+                        '-webkit-clip-path': '',
+                        'clip-path': ''
                     });
                 }
             })
@@ -166,15 +176,19 @@
                 if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
                     if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
                         console.log('click');
-                        jQuery(this).show();
-                        jQuery(this).attr('status', 'selected');
+                        item.show();
+                        item.attr('status', 'selected');
 
                         var index = parseInt(jQuery(this).attr('index'), 10);
 
-                        jQuery(this).animate({
+                        item.css({
+                            '-webkit-clip-path': '',
+                            'clip-path': ''
+                        });
+
+                        item.animate({
                             left: index * alphabetWidth,
-                            top: 0,
-                            color: '#000000'
+                            top: 0
                         }, 200, function () {
                             if (jQuery('div.alphabet[status="none"]').size() == 0) {
                                 jQuery('#mp3_' + word)[0].play();
