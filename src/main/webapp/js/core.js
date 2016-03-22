@@ -57,7 +57,9 @@
 
         jQuery('#mouse').css({
             width: mouseWidth,
-            height: mouseHeight
+            height: mouseHeight,
+            left: (width - mouseWidth)/2,
+            top: (height - mouseHeight)/2
         });
 
         jQuery(document).on('mousemove', function(e){
