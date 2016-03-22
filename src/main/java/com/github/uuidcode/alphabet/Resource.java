@@ -23,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "love".toUpperCase();
-        String imageUrl = "http://www.freshmorningquotes.com/wp-content/uploads/2015/09/Heart-in-holding-Hands-Love-Wallpaper-HD.jpg";
+        String word = "cat".toUpperCase();
+        String imageUrl = "http://animaliaz-life.com/data_images/cat/cat2.jpg";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);

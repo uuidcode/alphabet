@@ -14,3 +14,4 @@ wordList.push('FRIEND');
 wordList.push('COOKIE');
 wordList.push('SEA');
 wordList.push('LOVE');
+wordList.push('CAT');
