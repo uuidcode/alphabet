@@ -191,6 +191,8 @@
                                 $("#modalForm").modal({
                                     fadeDuration: 100
                                 });
+
+                                $('#mouse').remove();
                             }
                         });
 
