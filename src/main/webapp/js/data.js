@@ -15,3 +15,4 @@ wordList.push('COOKIE');
 wordList.push('SEA');
 wordList.push('LOVE');
 wordList.push('CAT');
+wordList.push('MOUNTAIN');

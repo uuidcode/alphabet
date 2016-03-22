@@ -23,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "cat".toUpperCase();
-        String imageUrl = "http://animaliaz-life.com/data_images/cat/cat2.jpg";
+        String word = "mountain".toUpperCase();
+        String imageUrl = "http://images.akamai.steamusercontent.com/ugc/25087975291817161/4B01A1274CA990A3577CC37E1DAA72F88DE353F8/";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);
