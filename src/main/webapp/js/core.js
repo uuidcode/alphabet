@@ -72,8 +72,8 @@
                 var offset = item.position();
                 var isVisible = false;
 
-                if (offset.left <= e.pageX && e.pageX <= offset.left + item.width()) {
-                    if (offset.top <= e.pageY && e.pageY <= offset.top + item.height()) {
+                if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
+                    if (offset.top -50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
                         isVisible = true;
                     }
                 }
@@ -155,39 +155,50 @@
             })
         }
 
-        jQuery('div.alphabet').on('click', function () {
-            console.log('click');
-            jQuery(this).show();
-            jQuery(this).attr('status', 'selected');
+        jQuery('body').on('click', function (e) {
+            var alphabet = jQuery('div.alphabet[status="none"]');
+            alphabet.each(function() {
+                var item = jQuery(this);
+                var offset = item.position();
 
-            var index = parseInt(jQuery(this).attr('index'), 10);
+                if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
+                    if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
+                        console.log('click');
+                        jQuery(this).show();
+                        jQuery(this).attr('status', 'selected');
 
-            jQuery(this).animate({
-                left: index * alphabetWidth,
-                top: 0,
-                color: '#000000'
-            }, 200, function () {
-                if (jQuery('div.alphabet[status="none"]').size() == 0) {
-                    jQuery('#mp3_' + word)[0].play();
+                        var index = parseInt(jQuery(this).attr('index'), 10);
 
-                    var imageDiv = jQuery('<div></div>');
-                    var imageItem =
-                        jQuery('<img>')
-                            .attr('src', './images/' + word + ".png");
-                    imageDiv
-                        .attr('id', 'modalForm')
-                        .hide()
-                        .append(imageItem);
+                        jQuery(this).animate({
+                            left: index * alphabetWidth,
+                            top: 0,
+                            color: '#000000'
+                        }, 200, function () {
+                            if (jQuery('div.alphabet[status="none"]').size() == 0) {
+                                jQuery('#mp3_' + word)[0].play();
 
-                    jQuery('body').append(imageDiv);
+                                var imageDiv = jQuery('<div></div>');
+                                var imageItem =
+                                    jQuery('<img>')
+                                        .attr('src', './images/' + word + ".png");
+                                imageDiv
+                                    .attr('id', 'modalForm')
+                                    .hide()
+                                    .append(imageItem);
 
-                    $("#modalForm").modal({
-                        fadeDuration: 100
-                    });
+                                jQuery('body').append(imageDiv);
+
+                                $("#modalForm").modal({
+                                    fadeDuration: 100
+                                });
+                            }
+                        });
+
+                        return;
+                    }
                 }
             });
         });
-
     });
 
     function duplicated(left, top) {
