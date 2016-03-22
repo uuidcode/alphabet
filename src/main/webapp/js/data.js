@@ -10,3 +10,5 @@ wordList.push('FATHER');
 wordList.push('SPRING');
 wordList.push('TEACHER');
 wordList.push('STUDENT');
+wordList.push('FRIEND');
+wordList.push('COOKIE');

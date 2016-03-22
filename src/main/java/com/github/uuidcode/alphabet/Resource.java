@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.zeroturnaround.exec.ProcessExecutor;
 
 public class Resource {
     public static final String ROOT_DIR = "./src/main/webapp";
@@ -22,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "friend".toUpperCase();
-        String imageUrl = "";
+        String word = "cookie".toUpperCase();
+        String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/b/b9/Chocolate_Chip_Cookies_-_kimberlykv.jpg";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);
@@ -35,17 +36,29 @@ public class Resource {
         FileUtils.write(DATA_JS_FILE, content, true);
     }
 
-    private static void convertImage(String word, File downloadFile) throws IOException {
+    private static void convertImage(String word, File downloadFile) throws Exception {
         File wordImageFile = new File(IMAGE_DIR, word + ".png");
 
         if (downloadFile.getName().endsWith("png")) {
             downloadFile.renameTo(wordImageFile);
         } else {
-            Runtime.getRuntime().exec(new String[] {"convert", downloadFile.getCanonicalPath(), wordImageFile.getCanonicalPath()});
+            int exitValue = new ProcessExecutor().command("convert",
+                downloadFile.getCanonicalPath(),
+                wordImageFile.getCanonicalPath())
+                .execute()
+                .getExitValue();
+            System.out.println("convert png exitValue:" + exitValue);
             downloadFile.delete();
         }
 
-        Runtime.getRuntime().exec(new String[] {"convert", wordImageFile.getCanonicalPath(), "-resize", "350x350", wordImageFile.getCanonicalPath()});
+        int exitValue = new ProcessExecutor().command("convert",
+            wordImageFile.getCanonicalPath(),
+            "-resize",
+            "350x350",
+            wordImageFile.getCanonicalPath())
+            .execute()
+            .getExitValue();
+        System.out.println("convert resize exitValue:" + exitValue);
     }
 
     private static void downloadMp3(String word) throws Exception {
@@ -67,6 +80,7 @@ public class Resource {
     }
 
     public static void download(String url, File file) throws Exception {
+        System.out.println(file.getCanonicalPath());
         HttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = httpClient.execute(httpGet);

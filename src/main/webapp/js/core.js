@@ -20,7 +20,7 @@
     var wordPositon = 0;
 
     function random(num) {
-        return Math.round(Math.random() * num);
+        return Math.floor(Math.random() * num);
     }
 
     jQuery(document).ready(function() {
