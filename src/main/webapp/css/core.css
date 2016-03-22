@@ -18,20 +18,10 @@ body {
 
 #mouse {
     position: absolute;
-    border-radius: 50%;
+    left: 50px;
+    top: 50px;
     width: 100px;
     height: 100px;
-    background: yellow;
-    border: 3px solid red;
-    opacity: 0.5;
-    border: 0px;
-}
-
-#backgroundLayer {
-    opacity: 0.3;
-    background: black;
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-    overflow: hidden;
+    box-shadow: 0 0 0 99999px rgba(0, 0, 0, .6);
+    border-radius: 50%;
 }
