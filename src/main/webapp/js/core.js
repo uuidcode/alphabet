@@ -146,6 +146,24 @@
 
             jQuery('body').append(alphabet);
 
+            var completeRegion =
+                jQuery('<div>')
+                    .css({
+                        background: 'white',
+                        opacity: 0.7,
+                        margin: '10px',
+                        width: alphabetWidth - 20,
+                        height: alphabetHeight - 20,
+                        position: 'absolute',
+                        left: i * alphabetWidth + 'px',
+                        top: '0px',
+                        zIndex: 50
+                    })
+                    .attr('index', i)
+                    .attr('class', 'complete');
+
+            jQuery('body').append(completeRegion);
+
             var left = 0;
             var top = 0;
 
@@ -190,6 +208,8 @@
                             left: index * alphabetWidth,
                             top: 0
                         }, 200, function () {
+                            jQuery('div.complete[index=' + index + ']').remove();
+
                             if (jQuery('div.alphabet[status="none"]').size() == 0) {
                                 jQuery('#mp3_' + word)[0].play();
 
