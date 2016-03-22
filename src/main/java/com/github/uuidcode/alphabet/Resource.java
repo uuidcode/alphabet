@@ -23,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "cookie".toUpperCase();
-        String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/b/b9/Chocolate_Chip_Cookies_-_kimberlykv.jpg";
+        String word = "sea".toUpperCase();
+        String imageUrl = "http://edugeography.com/images/caribbean-sea/caribbean-sea-08.jpg";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);
@@ -80,7 +80,6 @@ public class Resource {
     }
 
     public static void download(String url, File file) throws Exception {
-        System.out.println(file.getCanonicalPath());
         HttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = httpClient.execute(httpGet);
