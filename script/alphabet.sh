@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-font=${1}
-size=${2}
+font=Impact
+size=100x150
 imagePath=../src/main/webapp/images
 
 function createAlphabet() {
@@ -11,9 +11,7 @@ convert -background none -fill DodgerBlue \
       -gravity center \
       -font ${font} \
       label:${label} \
-      -trim +repage \
-      -bordercolor None -border 10x10 \
-      \
+      -bordercolor None \
       \( +clone -bordercolor None -border 1x1 \
          -alpha Extract -blur 0x8  -shade 130x30 -alpha On \
          -background gray50 -alpha background -auto-level \
@@ -24,8 +22,6 @@ convert -background none -fill DodgerBlue \
       \) \
       -compose Hardlight -composite  ${imagePath}/${label}.png
 }
-
-
 
 for i in {A..Z}
 do
