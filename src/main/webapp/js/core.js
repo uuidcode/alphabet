@@ -35,7 +35,7 @@
         'Y': [11, 1],
         'Z': [12, 1]
     };
-    var backgroundIndex = random(5) + 1;
+    var backgroundIndex = random(6) + 1;
     var alphabetSpriteIndex = random(3) + 1;
     var alphabetSprite = './images/alphabet' + alphabetSpriteIndex + ".png";
     var word = wordList[random(wordList.length)];
