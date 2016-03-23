@@ -7,34 +7,6 @@
     var matrix = [];
     var started = false;
     var allAlphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    var alphabetMatrix = {
-        'A': [0, 0],
-        'B': [1, 0],
-        'C': [2, 0],
-        'D': [3, 0],
-        'E': [4, 0],
-        'F': [5, 0],
-        'G': [6, 0],
-        'H': [7, 0],
-        'I': [8, 0],
-        'J': [9, 0],
-        'K': [10, 0],
-        'L': [11, 0],
-        'M': [12, 0],
-        'N': [0, 1],
-        'O': [1, 1],
-        'P': [2, 1],
-        'Q': [3, 1],
-        'R': [4, 1],
-        'S': [5, 1],
-        'T': [6, 1],
-        'U': [7, 1],
-        'V': [8, 1],
-        'W': [9, 1],
-        'X': [10, 1],
-        'Y': [11, 1],
-        'Z': [12, 1]
-    };
     var backgroundIndex = random(6) + 1;
     var alphabetSpriteIndex = random(3) + 1;
     var alphabetSprite = './images/alphabet' + alphabetSpriteIndex + ".png";
@@ -151,9 +123,8 @@
         var alphabetArray = word.split('');
 
         for (var i = 0; i < alphabetArray.length; i++) {
-            var spritePosition = alphabetMatrix[alphabetArray[i]];
-            var spriteX = -1 * spritePosition[0] * alphabetWidth;
-            var spriteY = -1 * spritePosition[1] * alphabetHeight;
+            var spriteX = -1 * (alphabetArray[i].charCodeAt(0) - 65)%13 * alphabetWidth;
+            var spriteY = -1 * Math.floor((alphabetArray[i].charCodeAt(0) - 65)/13) * alphabetHeight;
 
             var alphabet = jQuery('<div/>')
                 .attr('class', 'alphabet')
@@ -223,6 +194,9 @@
                 if (contain(offset, e, item)) {
                     console.log('click');
                     item.show();
+                    item.css({
+                        opacity: 1
+                    });
                     item.attr('status', 'selected');
 
                     var index = parseInt(jQuery(this).attr('index'), 10);
