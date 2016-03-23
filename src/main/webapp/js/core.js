@@ -49,13 +49,11 @@
             .width(jQuery(window).width());
     }
 
-    var wordPositon = 0;
-
     function random(num) {
         return Math.floor(Math.random() * num);
     }
 
-    function contain(offset, e, item, isVisible) {
+    function contain(offset, e, item) {
         if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
             if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
                 return true;
@@ -217,8 +215,8 @@
             var top = 0;
 
             for (var j = 0; j < 10000; j++) {
-                left = Math.floor((Math.random() * (width - alphabetWidth)) + 1);
-                top = Math.floor((Math.random() * (height - alphabetHeight)) + 1);
+                left = random(width - alphabetWidth) + 1;
+                top = random(height - alphabetHeight) + 1;
                 console.log('random');
 
                 if (!duplicated(left, top)) {
