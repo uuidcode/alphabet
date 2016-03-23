@@ -1,19 +1,12 @@
-    var alphabetSprite = './images/alphabet' + (random(3) + 1) + ".png";
-    console.log('alphabetSprite', alphabetSprite);
-
-    var word = wordList[random(wordList.length)];
-
-    console.log('word', word);
-
     var mouseWidth = 200;
     var mouseHeight = 200;
     var alphabetWidth = 150;
     var alphabetHeight = 200;
-
     var width = 0;
     var height = 0;
     var matrix = [];
     var started = false;
+    var allAlphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     var alphabetMatrix = {
         'A': [0, 0],
         'B': [1, 0],
@@ -42,29 +35,21 @@
         'Y': [11, 1],
         'Z': [12, 1]
     };
+    var backgroundIndex = random(5) + 1;
+    var alphabetSpriteIndex = random(3) + 1;
+    var alphabetSprite = './images/alphabet' + alphabetSpriteIndex + ".png";
+    var word = wordList[random(wordList.length)];
 
-    function resize() {
-        jQuery('#backgroundLayer')
-            .height(jQuery(window).height())
-            .width(jQuery(window).width());
-    }
-
-    function random(num) {
-        return Math.floor(Math.random() * num);
-    }
-
-    function contain(offset, e, item) {
-        if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
-            if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
-                return true;
-            }
-        }
-        return false;
-    }
+    console.log('backgroundIndex', backgroundIndex);
+    console.log('alphabetSpriteIndex', alphabetSpriteIndex);
+    console.log('alphabetSprite', alphabetSprite);
+    console.log('word', word);
 
     jQuery(document).ready(function() {
         width = jQuery(window).width();
         height = jQuery(window).height();
+        console.log('width', width);
+        console.log('height', height);
 
         setTimeout(function () {
             started = true;
@@ -81,18 +66,11 @@
             });
         }, 3000);
 
-        var backgroundIndex = random(4) + 1;
-
         console.log('backgroundIndex', backgroundIndex);
 
         jQuery('body').css({
             background: 'url("./images/background' + backgroundIndex + '.png") no-repeat center center fixed'
         });
-
-        console.log('width', width);
-        console.log('height', height);
-
-        matrix = [];
 
         for (var i = 0; i < height; i++) {
             var row = [];
@@ -127,7 +105,6 @@
 
                 isVisible = contain(offset, e, item);
 
-
                 if (isVisible) {
                     var x = e.pageX - offset.left;
                     var y = e.pageY - offset.top;
@@ -152,16 +129,14 @@
             })
         });
 
-        var alphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-
-        for (var i = 0; i < alphabetArray.length; i++) {
+        for (var i = 0; i < allAlphabetArray.length; i++) {
             jQuery('body')
                 .append(
                     jQuery('<audio></audio>')
-                    .attr('id', 'mp3_' + alphabetArray[i])
+                    .attr('id', 'mp3_' + allAlphabetArray[i])
                     .append(
                         jQuery('<source></source>')
-                            .attr('src', './mp3/' + alphabetArray[i] + ".mp3")));
+                            .attr('src', './mp3/' + allAlphabetArray[i] + ".mp3")));
 
         }
 
@@ -173,7 +148,7 @@
                 jQuery('<source></source>')
                     .attr('src', './mp3/' + word + ".mp3")));
 
-        alphabetArray = word.split('');
+        var alphabetArray = word.split('');
 
         for (var i = 0; i < alphabetArray.length; i++) {
             var spritePosition = alphabetMatrix[alphabetArray[i]];
@@ -313,4 +288,23 @@
 
     function closeCallback() {
         window.location.reload();
+    }
+
+    function resize() {
+        jQuery('#backgroundLayer')
+            .height(jQuery(window).height())
+            .width(jQuery(window).width());
+    }
+
+    function random(num) {
+        return Math.floor(Math.random() * num);
+    }
+
+    function contain(offset, e, item) {
+        if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
+            if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
+                return true;
+            }
+        }
+        return false;
     }
