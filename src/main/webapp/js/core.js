@@ -1,17 +1,47 @@
+    var alphabetSprite = './images/alphabet' + (random(3) + 1) + ".png";
+    console.log('alphabetSprite', alphabetSprite);
+
     var word = wordList[random(wordList.length)];
 
     console.log('word', word);
 
     var mouseWidth = 200;
     var mouseHeight = 200;
-    var alphabetWidth = 100;
-    var alphabetHeight = 150;
+    var alphabetWidth = 150;
+    var alphabetHeight = 200;
 
     var width = 0;
     var height = 0;
     var matrix = [];
     var started = false;
-
+    var alphabetMatrix = {
+        'A': [0, 0],
+        'B': [1, 0],
+        'C': [2, 0],
+        'D': [3, 0],
+        'E': [4, 0],
+        'F': [5, 0],
+        'G': [6, 0],
+        'H': [7, 0],
+        'I': [8, 0],
+        'J': [9, 0],
+        'K': [10, 0],
+        'L': [11, 0],
+        'M': [12, 0],
+        'N': [0, 1],
+        'O': [1, 1],
+        'P': [2, 1],
+        'Q': [3, 1],
+        'R': [4, 1],
+        'S': [5, 1],
+        'T': [6, 1],
+        'U': [7, 1],
+        'V': [8, 1],
+        'W': [9, 1],
+        'X': [10, 1],
+        'Y': [11, 1],
+        'Z': [12, 1]
+    };
 
     function resize() {
         jQuery('#backgroundLayer')
@@ -23,6 +53,15 @@
 
     function random(num) {
         return Math.floor(Math.random() * num);
+    }
+
+    function contain(offset, e, item, isVisible) {
+        if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
+            if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
+                return true;
+            }
+        }
+        return false;
     }
 
     jQuery(document).ready(function() {
@@ -88,11 +127,7 @@
                 var offset = item.position();
                 var isVisible = false;
 
-                if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
-                    if (offset.top -50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
-                        isVisible = true;
-                    }
-                }
+                isVisible = contain(offset, e, item);
 
 
                 if (isVisible) {
@@ -140,21 +175,21 @@
                 jQuery('<source></source>')
                     .attr('src', './mp3/' + word + ".mp3")));
 
-
         alphabetArray = word.split('');
 
         for (var i = 0; i < alphabetArray.length; i++) {
-            var image = jQuery('<img>')
-                .attr('src', './images/' + alphabetArray[i] + '.png');
+            var spritePosition = alphabetMatrix[alphabetArray[i]];
+            var spriteX = -1 * spritePosition[0] * alphabetWidth;
+            var spriteY = -1 * spritePosition[1] * alphabetHeight;
 
             var alphabet = jQuery('<div/>')
-                .append(image)
                 .attr('class', 'alphabet')
                 .attr('status', 'none')
                 .attr('index', i)
                 .attr('letter', alphabetArray[i])
                 .css({
-                    fontSize: alphabetHeight
+                    fontSize: alphabetHeight,
+                    background: 'url("' + alphabetSprite + '") ' + spriteX + 'px ' + spriteY + 'px'
                 });
 
             jQuery('body').append(alphabet);
@@ -181,12 +216,15 @@
             var left = 0;
             var top = 0;
 
-            do {
+            for (var j = 0; j < 10000; j++) {
                 left = Math.floor((Math.random() * (width - alphabetWidth)) + 1);
                 top = Math.floor((Math.random() * (height - alphabetHeight)) + 1);
                 console.log('random');
 
-            } while (duplicated(left, top));
+                if (!duplicated(left, top)) {
+                    break;
+                }
+            }
 
             setMatrix(left, top);
 
@@ -209,49 +247,47 @@
                 var item = jQuery(this);
                 var offset = item.position();
 
-                if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
-                    if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
-                        console.log('click');
-                        item.show();
-                        item.attr('status', 'selected');
+                if (contain(offset, e, item)) {
+                    console.log('click');
+                    item.show();
+                    item.attr('status', 'selected');
 
-                        var index = parseInt(jQuery(this).attr('index'), 10);
+                    var index = parseInt(jQuery(this).attr('index'), 10);
 
-                        item.css({
-                            '-webkit-clip-path': '',
-                            'clip-path': ''
-                        });
+                    item.css({
+                        '-webkit-clip-path': '',
+                        'clip-path': ''
+                    });
 
-                        item.animate({
-                            left: index * alphabetWidth,
-                            top: 0
-                        }, 200, function () {
-                            jQuery('div.complete[index=' + index + ']').remove();
+                    item.animate({
+                        left: index * alphabetWidth,
+                        top: 0
+                    }, 200, function () {
+                        jQuery('div.complete[index=' + index + ']').remove();
 
-                            if (jQuery('div.alphabet[status="none"]').size() == 0) {
-                                jQuery('#mp3_' + word)[0].play();
+                        if (jQuery('div.alphabet[status="none"]').size() == 0) {
+                            jQuery('#mp3_' + word)[0].play();
 
-                                var imageDiv = jQuery('<div></div>');
-                                var imageItem =
-                                    jQuery('<img>')
-                                        .attr('src', './images/' + word + ".png");
-                                imageDiv
-                                    .attr('id', 'modalForm')
-                                    .hide()
-                                    .append(imageItem);
+                            var imageDiv = jQuery('<div></div>');
+                            var imageItem =
+                                jQuery('<img>')
+                                    .attr('src', './images/' + word + ".png");
+                            imageDiv
+                                .attr('id', 'modalForm')
+                                .hide()
+                                .append(imageItem);
 
-                                jQuery('body').append(imageDiv);
+                            jQuery('body').append(imageDiv);
 
-                                $("#modalForm").modal({
-                                    fadeDuration: 100
-                                });
+                            $("#modalForm").modal({
+                                fadeDuration: 100
+                            });
 
-                                $('#mouse').remove();
-                            }
-                        });
+                            $('#mouse').remove();
+                        }
+                    });
 
-                        return;
-                    }
+                    return;
                 }
             });
         });
