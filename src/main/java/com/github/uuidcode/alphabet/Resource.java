@@ -23,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "airplane".toUpperCase();
-        String imageUrl = "http://www.boeing.com/resources/boeingdotcom/commercial/737max/jet-airways-737max-order/bca_jet_airways_400x225.jpg";
+        String word = "fish".toUpperCase();
+        String imageUrl = "http://i.dailymail.co.uk/i/pix/2014/04/11/article-2602765-0C5CD3C500000578-412_634x418.jpg";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);
