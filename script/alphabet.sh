@@ -14,6 +14,7 @@ convert -background none -fill ${color} \
       -size ${size} \
       -gravity center \
       -font ${font} \
+      -pointsize 200 \
       label:${label} \
       -bordercolor None \
       \( +clone -bordercolor None -border 1x1 \

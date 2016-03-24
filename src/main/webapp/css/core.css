@@ -19,10 +19,6 @@ body {
 
 #mouse {
     position: absolute;
-    left: 50px;
-    top: 50px;
-    width: 200px;
-    height: 200px;
     box-shadow: 0 0 0 99999px rgba(0, 0, 0, .6);
     border-radius: 50%;
     z-index: 100;
@@ -30,10 +26,6 @@ body {
 
 #mouseShadow {
     position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 200px;
-    height: 200px;
     box-shadow: inset -5px -5px 5px 5px rgba(0, 0, 0, .8);
     border-radius: 50%;
     z-index: 100;

@@ -1,5 +1,5 @@
-    var mouseWidth = 200;
-    var mouseHeight = 200;
+    var mouseWidth = 250;
+    var mouseHeight = 250;
     var alphabetWidth = 150;
     var alphabetHeight = 200;
     var width = 0;
@@ -35,6 +35,10 @@
                 height: mouseHeight,
                 left: (width - mouseWidth)/2,
                 top: (height - mouseHeight)/2
+            });
+            jQuery('#mouseShadow').css({
+                width: mouseWidth,
+                height: mouseHeight,
             });
         }, 3000);
 
@@ -187,11 +191,14 @@
             }
 
             var alphabet = jQuery('div.alphabet[status="none"]');
+            var selected = false;
+
             alphabet.each(function() {
                 var item = jQuery(this);
                 var offset = item.position();
 
-                if (contain(offset, e, item)) {
+                if (!selected && contain(offset, e, item)) {
+                    selected = true;
                     console.log('click');
                     item.show();
                     item.css({
@@ -233,8 +240,6 @@
                             $('#mouse').remove();
                         }
                     });
-
-                    return;
                 }
             });
         });
@@ -275,8 +280,9 @@
     }
 
     function contain(offset, e, item) {
-        if (offset.left - 50 <= e.pageX && e.pageX <= offset.left + item.width() + 50) {
-            if (offset.top - 50 <= e.pageY && e.pageY <= offset.top + item.height() + 50) {
+        var w = mouseWidth/3;
+        if (offset.left - w <= e.pageX && e.pageX <= offset.left + item.width() + w) {
+            if (offset.top - w <= e.pageY && e.pageY <= offset.top + item.height() + w) {
                 return true;
             }
         }
