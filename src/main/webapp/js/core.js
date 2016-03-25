@@ -7,7 +7,7 @@
     var matrix = [];
     var started = false;
     var allAlphabetArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    var backgroundIndex = random(8) + 1;
+    var backgroundIndex = random(9) + 1;
     var alphabetSpriteIndex = random(3) + 1;
     var alphabetSprite = './images/alphabet' + alphabetSpriteIndex + ".png";
     var word = wordList[random(wordList.length)];
