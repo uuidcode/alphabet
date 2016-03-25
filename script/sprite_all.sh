@@ -28,3 +28,18 @@
 
 ./alphabet.sh ComicSansMSB 150x200 Gray 160
 ./sprite.sh alphabet10.png
+
+./alphabet.sh ArialBk 150x200 DodgerBlue 160
+./sprite.sh alphabet11.png
+
+./alphabet.sh ArialBk 150x200 Red 160
+./sprite.sh alphabet12.png
+
+./alphabet.sh ArialBk 150x200 Green 160
+./sprite.sh alphabet13.png
+
+./alphabet.sh ArialBk 150x200 Yellow 160
+./sprite.sh alphabet14.png
+
+./alphabet.sh ArialBk 150x200 Gray 160
+./sprite.sh alphabet15.png
