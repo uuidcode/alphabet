@@ -18,3 +18,4 @@ wordList.push('CAT');
 wordList.push('MOUNTAIN');
 wordList.push('AIRPLANE');
 wordList.push('FISH');
+wordList.push('FLOWER');
