@@ -24,3 +24,4 @@ wordList.push('ELEPHANT');
 wordList.push('MONKEY');
 wordList.push('BROTHER');
 wordList.push('SISTER');
+wordList.push('HOUSE');
