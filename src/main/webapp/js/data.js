@@ -19,3 +19,8 @@ wordList.push('MOUNTAIN');
 wordList.push('AIRPLANE');
 wordList.push('FISH');
 wordList.push('FLOWER');
+wordList.push('BANANA');
+wordList.push('ELEPHANT');
+wordList.push('MONKEY');
+wordList.push('BROTHER');
+wordList.push('SISTER');

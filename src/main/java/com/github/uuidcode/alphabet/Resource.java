@@ -23,8 +23,8 @@ public class Resource {
     public static final File DATA_JS_FILE = new File(ROOT_DIR, "js/data.js");
 
     public static void main(String[] args) throws Exception {
-        String word = "flower".toUpperCase();
-        String imageUrl = "http://www.phoolwala.com/adminpanel/uploads/large/bangalore-flowers-6-mix-gerberas-bouquet-paper.jpg";
+        String word = "sister".toUpperCase();
+        String imageUrl = "http://cdn-media-1.lifehack.org/wp-content/files/2015/05/Older-sister-and-younger-sister.jpg";
 
         downloadMp3(word);
         downloadAndConvertImage(word, imageUrl);
